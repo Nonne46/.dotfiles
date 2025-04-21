@@ -1,0 +1,5 @@
+# Install
+
+```console
+./install.sh
+```
