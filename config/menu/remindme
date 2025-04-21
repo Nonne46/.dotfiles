@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# remindme - A simple reminder script using notify-send and at
+# Usage: remindme [message] [time]
+# If no arguments provided, will use dmenu to prompt for input
+
+show_usage() {
+  echo "Usage: remindme [message] [time]"
+  echo "Example: remindme 'Call Mom' '30 minutes'"
+  echo "If no arguments provided, will use dmenu to prompt for input"
+}
+
+if ! command -v at &> /dev/null; then
+  echo "Error: 'at' command not found. Please install it."
+  exit 1
+fi
+
+if ! command -v notify-send &> /dev/null; then
+  echo "Error: 'notify-send' command not found. Please install it."
+  exit 1
+fi
+
+if [ $# -eq 2 ]; then
+  message="$1"
+  time="$2"
+elif [ $# -eq 0 ]; then
+  if ! command -v dmenu &> /dev/null; then
+    echo "Error: 'dmenu' not found. Please install it or provide arguments."
+    exit 1
+  fi
+  
+  message=$(dmenu -p "Reminder message:" </dev/null)
+  if [ -z "$message" ]; then
+    exit 0
+  fi
+  
+  time=$(dmenu -p "Time (e.g., '5 minutes', '1 hour', '9:00 tomorrow'):" </dev/null)
+  if [ -z "$time" ]; then
+    exit 0
+  fi
+else
+  show_usage
+  exit 1
+fi
+
+cmd="notify-send 'Reminder' '$message' -u critical"
+
+echo "$cmd" | at now + $time 2>/dev/null
+
+notify-send "Reminder set" "\"$message\" will remind you in $time" -u low
+
+exit 0

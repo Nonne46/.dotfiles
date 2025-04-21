@@ -1,0 +1,18 @@
+[font]
+size = 12
+
+[font.bold]
+family = "Sarasa Term J"
+style = "Bold"
+
+[font.bold_italic]
+family = "Sarasa Term J"
+style = "Bold Italic"
+
+[font.italic]
+family = "Sarasa Term J"
+style = "Italic"
+
+[font.normal]
+family = "Sarasa Term J"
+style = "Regular"

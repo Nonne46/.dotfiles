@@ -1,0 +1,19 @@
+#!/bin/bash
+set -xe
+
+key=$NK
+clip=$(xclip -o)
+
+response=$(curl -X POST \
+-s \
+-X POST \
+-F "url=$clip" \
+-H "Authorization: $key" \
+$NS)
+
+url=$response
+if command -v xclip &> /dev/null; then
+    echo -n "$url" | xclip -in -selection clipboard
+fi
+
+notify-send "Your scheise uploaded" "You can paste"

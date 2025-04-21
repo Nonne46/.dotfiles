@@ -1,0 +1,52 @@
+[[plugin.deps]]
+use = "Sonico98/exifaudio"
+rev = "7ff7141"
+hash = "666ccba55119fba4c25b8ad354b2855c"
+
+[[plugin.deps]]
+use = "stelcodes/bunny"
+rev = "a64f32a"
+hash = "22d9e6f72230be88ab322040626623a"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "4b027c7"
+hash = "2f1053f89d1a301a648ab181d0948e38"
+
+[[plugin.deps]]
+use = "raikhan/compress"
+rev = "0e21310"
+hash = "64eb7a1b835cf57bbda62b4bf4c80fe0"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "f1c6b69"
+hash = "6e789212eb41d937bab04877ca361099"
+
+[[plugin.deps]]
+use = "DreamMaoMao/clipboard"
+rev = "93b73d4"
+hash = "3af52f1d5ba79a7dd9cbc1d2918feab5"
+
+[[plugin.deps]]
+use = "boydaihungst/save-clipboard-to-file"
+rev = "3309c78"
+hash = "ced88fdc206396265f0007fc491436cd"
+
+[[plugin.deps]]
+use = "boydaihungst/file-extra-metadata"
+rev = "0c061a2"
+hash = "433d4fcb211b823b44bdb00451ef4934"
+
+[[plugin.deps]]
+use = "Sonico98/allmytoes"
+rev = "1e43bfd"
+hash = "8f9bfa292af429a27b81d424085ede67"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+rev = "4b027c7"
+hash = "5e24c167e9ae9a203a48f2a438b8c705"
+
+[flavor]
+deps = []

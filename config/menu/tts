@@ -1,0 +1,87 @@
+#!/bin/bash
+set -xe
+
+VIRTUAL_SINK="tts_output"
+API_KEY=$NTTS_KEY
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+SPEAKER_FILE="$SCRIPT_DIR/.tts_speaker"
+
+fetch_speakers() {
+    curl -s "https://ntts.fdev.team/api/v1/tts/speakers"
+}
+
+parse_speakers() {
+    jq -r '.voices[].speakers[0]' <<< "$1"
+}
+
+speaker_id=$1
+text=$2
+
+if [ -z "$speaker_id" ] && [ -f "$SPEAKER_FILE" ]; then
+    speaker_id=$(cat "$SPEAKER_FILE")
+fi
+
+if [ -z "$speaker_id" ]; then
+    speaker_id=$(dmenu -p "Enter speaker ID:" < /dev/null)
+fi
+
+if [ -z "$text" ]; then
+    text=$(dmenu -p "Enter text:" < /dev/null)
+fi
+
+if [ "$text" = "c" ]; then
+    speakers_response=$(fetch_speakers)
+    if [ $? -ne 0 ]; then
+        notify-send "TTS" "Failed to fetch speakers list"
+        exit 1
+    fi
+    
+    speaker_list=$(parse_speakers "$speakers_response")
+    if [ -z "$speaker_list" ]; then
+        notify-send "TTS" "No speakers available"
+        exit 1
+    fi
+    
+    selected_speaker=$(echo "$speaker_list" | dmenu -p "Select speaker:")
+    if [ -n "$selected_speaker" ]; then
+        echo "$selected_speaker" > "$SPEAKER_FILE"
+        notify-send "TTS" "Speaker changed to $selected_speaker"
+    else
+        notify-send "TTS" "Speaker selection cancelled"
+    fi
+    exit 0
+fi
+
+if [ -z "$speaker_id" ] || [ -z "$text" ]; then
+    notify-send "TTS" "Error: Missing required parameters"
+    exit 1
+fi
+
+temp_file=$(mktemp /tmp/tts_temp.XXXXXX.wav)
+
+curl -G --silent \
+    --data-urlencode "text=$text" \
+    --data-urlencode "speaker=$speaker_id" \
+    --data-urlencode "ext=wav" \
+    -H "Authorization: $API_KEY" \
+    "https://ntts.fdev.team/api/v1/tts" -o "$temp_file"
+
+if [ $? -ne 0 ]; then
+    notify-send "TTS" "Failed to download TTS audio"
+    rm "$temp_file"
+    exit 1
+fi
+
+if ! pactl list sinks short | grep -q "$VIRTUAL_SINK"; then
+    pactl load-module module-null-sink \
+        sink_name="$VIRTUAL_SINK" \
+        sink_properties=device.description="TTS_Virtual_Output"
+    pactl load-module module-remap-source \
+        source_name="${VIRTUAL_SINK}_mic" \
+        master="${VIRTUAL_SINK}.monitor" \
+        source_properties=device.description="TTS_Virtual_Microphone"
+fi
+
+notify-send "TTS" "Playing audio..."
+paplay --device="$VIRTUAL_SINK" "$temp_file"
+rm "$temp_file"

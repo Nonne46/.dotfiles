@@ -1,0 +1,108 @@
+# Something global
+[manager]
+sort_by = "natural"
+sort_translit = true
+sort_dir_first = true
+
+# Plugins
+[[plugin.spotters]]
+name = "*"
+run = "file-extra-metadata"
+
+[[plugin.prepend_fetchers]]
+id   = "mime"
+name = "*"
+run  = "mime-ext"
+prio = "high"
+
+[plugin]
+prepend_previewers = [
+	{ name = "*/", run = "folder" },
+
+	# Code
+	{ mime = "text/*", run = "code" },
+	{ mime = "application/{mbox,javascript,wine-extension-ini}", run = "code" },
+
+	# JSON
+	{ mime = "application/{json,ndjson}", run = "json" },
+
+	# Image
+	{ mime = "image/{avif,hei?,jxl}", run = "magick" },
+	{ mime = "image/svg+xml", run = "magick" },
+	{ mime = "image/heic",    run = "magick" },
+	{ mime = "image/jxl",     run = "magick" },
+	# Handle other image types with allmytoes
+	# { mime = "image/*", run = "allmytoes" },
+	{ mime = "image/*", run = "image" },
+
+	# Video
+	{ mime = "video/*", run = "video" },
+
+	# PDF
+	{ mime = "application/pdf", run = "pdf" },
+	
+	# Archive
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "archive" },
+	{ mime = "application/{debian*-package,redhat-package-manager,rpm,android.package-archive}", run = "archive" },
+	{ name = "*.{AppImage,appimage}", run = "archive" },
+
+	# Virtual Disk / Disk Image
+	{ mime = "application/{iso9660-image,qemu-disk,ms-wim,apple-diskimage}", run = "archive" },
+	{ mime = "application/virtualbox-{vhd,vhdx}", run = "archive" },
+	{ name = "*.{img,fat,ext,ext2,ext3,ext4,squashfs,ntfs,hfs,hfsx}", run = "archive" },
+
+	# Font
+	{ mime = "font/*", run = "font" },
+	{ mime = "application/ms-opentype", run = "font" },
+
+	# Empty file
+	{ mime = "inode/empty", run = "empty" },
+
+	# Fallback
+	{ name = "*", run = "file-extra-metadata" },
+	{ name = "*", run = "file" },
+]
+
+prepend_preloaders = [
+	# Image
+	{ mime = "image/{avif,hei?,jxl}", run = "magick" },
+	{ mime = "image/svg+xml", run = "magick" },
+	{ mime = "image/heic",    run = "magick" },
+	{ mime = "image/jxl",     run = "magick" },
+
+	# Handle other image types with allmytoes
+	# { mime = "image/*", run = "allmytoes" },
+	{ mime = "image/*", run = "image" },
+
+	# Video
+	{ mime = "video/*", run = "video" },
+
+	# PDF
+	{ mime = "application/pdf", run = "pdf" },
+
+	# Font
+	{ mime = "font/*", run = "font" },
+	{ mime = "application/ms-opentype", run = "font" },
+]
+
+# Mein scheise
+[[opener.upload-nny]]
+desc = "upload-nny"
+run = '''
+links=""
+
+for f in "$@"; do
+  link=$(curl -s -X POST -F "file=@$f" -H "Authorization: $NK" $NS)
+  [[ -n "$links" ]] && links+=$'\n'
+  links+="$link"
+done
+
+echo -n "$links" | xclip -in -selection clipboard
+
+notify-send "Your scheise uploaded" "You can paste"
+'''
+for = "unix"
+
+[[open.append_rules]]
+name = "*"
+use = "upload-nny"

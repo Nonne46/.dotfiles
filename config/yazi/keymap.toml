@@ -1,0 +1,36 @@
+# plugins
+[[manager.prepend_keymap]]
+desc = "Start bunny.yazi"
+on   = ";"
+run  = "plugin bunny"
+
+[[manager.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
+
+[[manager.prepend_keymap]]
+on   = [ "c", "a" ]
+run  = "plugin compress"
+desc = "Archive selected files"
+
+# [[manager.prepend_keymap]]
+# on   = [".", "s"]
+# run  = "plugin what-size"
+# desc = "Calc size of selection or cwd"
+
+[[manager.prepend_keymap]]
+on   = ["c", "b"]
+run  = "plugin clipboard"
+decs = "Copy files into clipboard"
+
+[[manager.prepend_keymap]]
+on   = ["c", "p"]
+run  = "plugin save-clipboard-to-file"
+decs = "Paste clipboard content to file and hover after created"
+
+# [[manager.prepend_keymap]]
+# on   = "<Tab>"
+# run  = "spot"
+# decs = "Paste clipboard content to file and hover after created"
+

@@ -1,0 +1,53 @@
+#!/bin/bash
+# set -xe
+
+key=$NK
+base_path="$HOME/Images/Captures"
+dir_name="$base_path/$(date +"%Y-%m")"
+mkdir -p "$dir_name"
+
+filename=$(date +"%Y-%m-%d_%H-%M-%S.png")
+filepath="$dir_name/$filename"
+
+flameshot gui --path "$filepath"
+
+if [ -s "$filepath" ]; then
+    if command -v pngquant &> /dev/null; then
+        pngquant --strip --quality=95-98 --speed=1 --ext=.png --force "$filepath"
+    fi
+
+    if command -v optipng &> /dev/null; then
+        optipng -zw32k -o2 -strip all "$filepath"
+    fi
+
+    if command -v ect &> /dev/null; then
+        ect --allfilters --mt-deflate -strip --strict -3 "$filepath"
+    fi
+
+    if command -v exiftool &> /dev/null; then
+        exiftool -Comment="$NSS" -overwrite_original "$filepath"
+    fi
+
+    response=$(curl -X POST \
+	-s \
+	-X POST \
+        -F "file=@$filepath" \
+	-H "Authorization: $key" \
+	$NS)
+    
+
+    url=$response
+    if command -v xclip &> /dev/null; then
+        echo -n "$url" | xclip -in -selection clipboard
+    elif command -v wl-copy &> /dev/null; then
+        echo "$url" | wl-copy
+    fi
+    
+    echo "Screenshot saved to: $filepath"
+    echo "Uploaded to: $url"
+    notify-send "Your scheise uploaded" "You can paste"
+else
+    echo "Screenshot was not taken or file is empty"
+	notify-send "Your scheise errored" "Screenshot was empty. idk."
+    exit 1
+fi
