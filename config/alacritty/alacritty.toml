@@ -24,4 +24,4 @@ y = 6
 
 [general]
 live_config_reload = true
-import = ["/home/nny/.config/alacritty/colors/oxocarbon.toml", "/home/nny/.config/alacritty/fonts/sarasa.toml"]
+import = ["colors/oxocarbon.toml", "fonts/sarasa.toml"]

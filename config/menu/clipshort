@@ -2,7 +2,7 @@
 set -xe
 
 key=$NK
-clip=$(xclip -o)
+clip=$(xclip -o -selection clipboard)
 
 response=$(curl -X POST \
 -s \
