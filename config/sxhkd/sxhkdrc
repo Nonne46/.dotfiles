@@ -33,6 +33,13 @@ super + Escape
 super + alt + w
 	feh --bg-fill --no-fehbg --randomize ~/Images/Wallpapers
 
+# mouseless navigation
+super + alt + x
+	warpd --oneshot --hint
+
+super + shift + x
+	warpd --oneshot --hint2
+
 # capture screenshot
 print
 	"$HOME"/.config/menu/shot

@@ -25,7 +25,7 @@ packages=(
 
 	# X shit
 	xorg-xrandr xorg-xsetroot xorg-xprop xorg-server
-	xclip xcursor-pixelfun-all
+	xclip xcursor-pixelfun-all warpd
 
 	# Font shit
 	ttf-croscore ttf-fantasque-sans-mono ttf-iosevka
