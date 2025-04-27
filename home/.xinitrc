@@ -9,12 +9,12 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/.cache"
 
-[ -z "$XDG_SESSION_TYPE" ] && export XDG_SESSION_TYPE="x11"
-[ -z "$XDG_SESSION_DESKTOP" ] && export XDG_SESSION_DESKTOP="bspwm"
-[ -z "$XDG_CURRENT_DESKTOP" ] && export XDG_CURRENT_DESKTOP="bspwm"
+export XDG_SESSION_TYPE="x11"
+export XDG_SESSION_DESKTOP="bspwm"
+export XDG_CURRENT_DESKTOP="bspwm"
 
-[ -z "$DESKTOP_SESSION" ] && export DESKTOP_SESSION="bspwm"
-[ -z "$WINDOW_MANAGER" ] && export WINDOW_MANAGER="bspwm"
+export DESKTOP_SESSION="bspwm"
+export WINDOW_MANAGER="bspwm"
 
 [ -f "$HOME/.dotfiles_env" ] && source "$HOME/.dotfiles_env"
 

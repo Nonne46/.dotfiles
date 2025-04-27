@@ -35,10 +35,10 @@ super + alt + w
 
 # mouseless navigation
 super + alt + x
-	warpd --oneshot --hint
+	warpd --oneshot --hint --click 1
 
 super + shift + x
-	warpd --oneshot --hint2
+	warpd --oneshot --hint2 --click 1
 
 # capture screenshot
 print

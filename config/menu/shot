@@ -12,9 +12,9 @@ filepath="$dir_name/$filename"
 flameshot gui --path "$filepath"
 
 if [ -s "$filepath" ]; then
-    if command -v pngquant &> /dev/null; then
-        pngquant --strip --quality=95-98 --speed=1 --ext=.png --force "$filepath"
-    fi
+    # if command -v pngquant &> /dev/null; then
+        # pngquant --strip --quality=95-98 --speed=1 --ext=.png --force "$filepath"
+    # fi
 
     if command -v optipng &> /dev/null; then
         optipng -zw32k -o2 -strip all "$filepath"
