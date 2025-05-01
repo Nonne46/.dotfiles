@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xe
 
 # remindme - A simple reminder script using notify-send and at
 # Usage: remindme [message] [time]
@@ -43,7 +44,7 @@ else
   exit 1
 fi
 
-cmd="notify-send 'Reminder' '$message' -t 0
+cmd="notify-send 'Reminder' '$message' -t 0"
 
 echo "$cmd" | at now + $time 2>/dev/null
 
