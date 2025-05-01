@@ -43,7 +43,7 @@ else
   exit 1
 fi
 
-cmd="notify-send 'Reminder' '$message' -u critical"
+cmd="notify-send 'Reminder' '$message' -t 0
 
 echo "$cmd" | at now + $time 2>/dev/null
 

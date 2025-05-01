@@ -1,0 +1,28 @@
+[user]
+	name = nny
+	email = vanahacar@keemail.me
+
+[init]
+	defaultBranch = master
+
+[alias]
+    a = add
+    b = branch
+    c = commit
+    d = diff
+    dn = diff --no-index
+    ds = diff --staged
+    e = restore
+    g = log --oneline -n 20 --graph
+    h = stash
+    i = init
+    l = pull
+    m = merge
+    n = clone --depth 1
+    o = show
+    p = push
+    r = reset
+    s = status -s
+    t = remote
+    v = revert
+    w = switch

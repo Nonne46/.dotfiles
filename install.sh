@@ -1,11 +1,13 @@
 #!/bin/bash
-set -xe
+set -xeu
 
 PACMAN='sudo pacman -S --needed'
 YAY='yay -S --needed'
 GIT='git clone --depth 1 --single-branch'
-RUSTC='rustc -C link-arg=-Wl,--gc-sections -C opt-level=z -C lto -C codegen-units=1 -C panic=abort -C target-cpu=native -C debuginfo=0 -C strip=debuginfo -C strip=symbols --target=x86_64-unknown-linux-musl -o'
-export LINKDOT=$PWD
+RUSTC='rustc -C link-arg=-Wl,--gc-sections -C opt-level=z -C lto -C codegen-units=1 -C panic=abort -C target-cpu=native -C debuginfo=0 -C strip=debuginfo -C strip=symbols -o'
+LINKDOT=$PWD
+
+[[ ! -f "${LINKDOT}/install.sh" ]] && exit 1
 
 # Install yay
 if ! command -v yay 2>&1 > /dev/null
@@ -21,11 +23,11 @@ fi
 packages=(
 	# Main impact
 	bspwm sxhkd dmenu polybar picom
-	dunst alacritty xorg-xinit polkit-gnome
+	dunst alacritty polkit-gnome
 
 	# X shit
 	xorg-xrandr xorg-xsetroot xorg-xprop xorg-server
-	xclip xcursor-pixelfun-all warpd
+	xxorg-xinit clip xcursor-pixelfun-all warpd
 
 	# Font shit
 	ttf-croscore ttf-fantasque-sans-mono ttf-iosevka
@@ -33,18 +35,18 @@ packages=(
 	noto-fonts noto-fonts-cjk noto-fonts-emoji
 
 	# File manager shit
-	thunar thunar-volman thunar-archive-plugin 	tumbler
-	yazi xdg-desktop-portal xdg-desktop-portal-termfilechooser-hunkyburrito-git
+	thunar thunar-volman thunar-archive-plugin tumbler
+	yazi
 
 	# Filesystems shit
 	gvfs gvfs-mtp gvfs-nfs gvfs-smb
 	ntfs-3g btrfs-progs squashfs-tools
 
 	# Audio shit
-	# pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer
+	pipewire pipewire-jack pipewire-pulse wireplumber
 
 	# Bluetooth shit
-	# bluez bluez-util
+	# bluez bluez-util blueman
 	
 	# Archive shit
 	lrzip lzip unrar unzip 7zip tar pigz zstd pbzip2
@@ -53,13 +55,16 @@ packages=(
 	# Modern cli shit
 	bat jq fd fzf ripgrep eza dust sd tealdeer btop gnupg
 	hyperfine xh zoxide ffmpeg imagemagick ueberzugpp hexyl
-	neovim fish at
+	neovim fish at feh flameshot yt-dlp
+
+	# PDF shit
+	zathura zathura-cb zathura-pdf-poppler
 
 	# Multimedia shit
-	mpv zathura zathura-pdf-mupdf mpd feh flameshot
+	mpv mpd
 
 	# Compilers
-	rustup go
+	rustup go gcc make patch
 )
 
 $YAY "${packages[@]}"
@@ -80,7 +85,6 @@ if command -v rustc &>/dev/null &&
 	! rustup show active-toolchain &>/dev/null
 then
     rustup default stable
-    rustup target add x86_64-unknown-linux-musl
 fi
 
 # Compile some shit

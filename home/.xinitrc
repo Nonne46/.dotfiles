@@ -1,5 +1,4 @@
 #!/bin/sh
-# ~/.xinitrc
 
 userresources="$HOME"/.Xresources
 usermodmap="$HOME"/.Xmodmap
@@ -41,17 +40,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 	unset f
 fi
 
-# Uncomment for international letters through Right Alt.
-#setxkbmap -layout us -variant altgr-intl -option nodeadkeys
-
-# Uncomment if you would like to use caps lock as super.
-#setxkbmap -option caps:super
-
-# Sets left pointer as the default shape for the desktop.
 xsetroot -cursor_name left_ptr
 
-# numlock
-numlockx &
-
-# bspwm is configured in ~/.config/bspwm/bspwmrc
 exec bspwm

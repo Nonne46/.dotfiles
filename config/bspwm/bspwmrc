@@ -1,42 +1,29 @@
 #!/bin/sh
 
-# If these programs are already running, don't run them again.
 pgrep -x sxhkd > /dev/null                               || sxhkd &
 pgrep -x picom > /dev/null                               || picom --config "$HOME"/.config/picom/bspicom.conf &
 pgrep -x polkit-gnome-authentication-agent-1 > /dev/null || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-# pgrep -x greenclip > /dev/null                           || greenclip daemon &
+pgrep -x polybar > /dev/null                             || polybar bspwm -r &
 
-
-# Sets every desktop onto monitor one
-bspc monitor ^1 -d 1 2 3 4 5 6 7 8 9 0
+bspc monitor -d 一 二 三 四 五 六 七 八 九 十
+# switch off weeaboo numbers
+# bspc monitor ^1 -d 1 2 3 4 5 6 7 8 9 0
 
 bspc config border_radius         20 # 20
 bspc config border_width          0  # 3
 bspc config window_gap            0  # 10
-# If you will use a status bar, set this.
-bspc config top_padding           25
-bspc config split_ratio           0.5
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle       true
 bspc config focus_follows_pointer true
 
-# Borders shit
-bspc config focused_border_color "#FFDEDE" 
-bspc config normal_border_color "#A3CBE7"
-bspc config active_border_color "#B4E3AD"
-bspc config presel_feedback_color "#E5A3A1"
+# bspc config focused_border_color "#FFDEDE" 
+# bspc config normal_border_color "#A3CBE7"
+# bspc config active_border_color "#B4E3AD"
+# bspc config presel_feedback_color "#E5A3A1"
 
 bspc wm --adopt-orphans
 
-# Rules
-bspc rule -r "*"
-
-
-floating=(alacritty_float Yad Onboard mpv Lxappearance Viewnior feh)
-bspc rule -a ${floating[@]} state=floating follow=on focus=on
-
-tiled=(Zathura feh vlc)
-bspc rule -a ${tiled[@]} state=tiled follow=on focus=on
-
-bspc rule -a FileChooser state=floating center=true
-
 feh --bg-fill --no-fehbg --randomize ~/Images/Wallpapers &
-polybar bspwm

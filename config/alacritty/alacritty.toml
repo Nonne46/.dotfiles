@@ -1,26 +1,16 @@
-[cursor]
-unfocused_hollow = false
-
-[cursor.style]
-blinking = "On"
-shape = "Block"
-
-[env]
-TERM = "alacritty"
-WINIT_X11_SCALE_FACTOR = "1.0"
-
 [window]
 decorations = "full"
 dynamic_title = true
 startup_mode = "Windowed"
+padding = { x = 4, y = 4 }
+dimensions = { columns = 120, lines = 25 }
 
-[window.dimensions]
-columns = 120
-lines = 25
+[cursor]
+unfocused_hollow = false
 
-[window.padding]
-x = 6
-y = 6
+[env]
+TERM = "alacritty"
+WINIT_X11_SCALE_FACTOR = "1.0"
 
 [general]
 live_config_reload = true
