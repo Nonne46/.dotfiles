@@ -41,7 +41,7 @@ super + shift + x
 	warpd --oneshot --hint2 --click 1
 
 # capture screenshot
-print
+Print
 	"$HOME"/.config/menu/shot
 	# flameshot gui
 
@@ -57,6 +57,9 @@ super + r
 
 super + ctrl + a
 	"$HOME"/.config/menu/tts
+
+super + ctrl + n
+	"$HOME"/.config/menu/scrambler
 
 # picom hotkeys
 #

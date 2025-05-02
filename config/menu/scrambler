@@ -1,0 +1,73 @@
+#!/bin/bash
+set -xe
+
+original_clipboard=$(xclip -selection clipboard -o 2>/dev/null)
+active_window=$(xdotool getactivewindow)
+
+xdotool keyup Shift Super Ctrl Alt Left Right
+
+sleep 0.5
+xdotool key --window $active_window Home Shift+End
+xdotool key --window $active_window ctrl+c
+sleep 0.2
+
+text=$(xclip -selection clipboard -o)
+scrambled=""
+
+for (( i=0; i<${#text}; i++ )); do
+    char="${text:$i:1}"
+    
+    case "$char" in
+        "o") char="0" ;;
+        "i") char="1" ;;
+        "e") char="3" ;;
+        "a") char="4" ;;
+        "s") char="5" ;;
+        "t") char="7" ;;
+        "l") char="1" ;;
+        "E") char="3" ;;
+        "A") char="4" ;;
+        "S") char="5" ;;
+        "T") char="7" ;;
+        "B") char="8" ;;
+        "g") char="9" ;;
+        "G") char="9" ;;
+        "А") char="4" ;;
+        "а") char="4" ;;
+        "о") char="0" ;;
+        "О") char="0" ;;
+    esac
+    
+    if (( RANDOM % 10 < 6 )) && [[ "$char" =~ [0-9] ]]; then
+        orig_char="${text:$i:1}"
+        char="$orig_char"
+    fi
+    
+    if [ "$char" = " " ]; then
+        if (( RANDOM % 10 < 6 )); then
+            spaces=$(( (RANDOM % 5) + 1 ))
+            for (( j=0; j<$spaces; j++ )); do
+                scrambled+=" "
+            done
+        else
+            scrambled+=" "
+        fi
+    else
+        if (( RANDOM % 10 < 1 )) && [[ "$char" =~ [a-z] ]]; then
+            char=$(echo "$char" | tr '[:lower:]' '[:upper:]')
+        fi
+        
+        if (( RANDOM % 20 < 1 )); then
+            scrambled+="$char$char"
+        else
+            scrambled+="$char"
+        fi
+    fi
+done
+
+echo -n "$scrambled" | xclip -selection clipboard
+
+xdotool key --window $active_window ctrl+v
+sleep 0.2
+
+echo -n "$original_clipboard" | xclip -selection clipboard
