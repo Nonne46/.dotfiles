@@ -9,11 +9,11 @@ sort_dir_first = true
 name = "*"
 run = "file-extra-metadata"
 
-[[plugin.prepend_fetchers]]
-id   = "mime"
-name = "*"
-run  = "mime-ext"
-prio = "high"
+# [[plugin.prepend_fetchers]]
+# id   = "mime"
+# name = "*"
+# run  = "mime-ext"
+# prio = "high"
 
 [plugin]
 prepend_previewers = [

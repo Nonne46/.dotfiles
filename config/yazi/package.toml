@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
-rev = "7ff7141"
-hash = "666ccba55119fba4c25b8ad354b2855c"
+rev = "e766cd2"
+hash = "5fd39bf4e88d6a046d4b81691a38d615"
 
 [[plugin.deps]]
 use = "stelcodes/bunny"
-rev = "a64f32a"
-hash = "22d9e6f72230be88ab322040626623a"
+rev = "a0b4e18"
+hash = "7acba2bb504c67dd7f2da135b88aae1b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "4b027c7"
-hash = "2f1053f89d1a301a648ab181d0948e38"
+rev = "86d28e4"
+hash = "a030fe48d91b04341ad2fba9be957df"
 
 [[plugin.deps]]
 use = "raikhan/compress"
@@ -20,8 +20,8 @@ hash = "64eb7a1b835cf57bbda62b4bf4c80fe0"
 
 [[plugin.deps]]
 use = "pirafrank/what-size"
-rev = "f1c6b69"
-hash = "6e789212eb41d937bab04877ca361099"
+rev = "d896656"
+hash = "62251f94eb67648d42cdfcfb8be0fad2"
 
 [[plugin.deps]]
 use = "DreamMaoMao/clipboard"
@@ -30,23 +30,23 @@ hash = "3af52f1d5ba79a7dd9cbc1d2918feab5"
 
 [[plugin.deps]]
 use = "boydaihungst/save-clipboard-to-file"
-rev = "3309c78"
-hash = "ced88fdc206396265f0007fc491436cd"
+rev = "71ad8f1"
+hash = "2f717973e0a772bef7a1cda697ef2c2c"
 
 [[plugin.deps]]
 use = "boydaihungst/file-extra-metadata"
-rev = "0c061a2"
-hash = "433d4fcb211b823b44bdb00451ef4934"
+rev = "ec035d6"
+hash = "b23b7db6beb2854a689c648a38843f8c"
 
 [[plugin.deps]]
 use = "Sonico98/allmytoes"
-rev = "1e43bfd"
-hash = "8f9bfa292af429a27b81d424085ede67"
+rev = "dd7895d"
+hash = "c6983275665989e59e7fed04be2ac847"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "4b027c7"
-hash = "5e24c167e9ae9a203a48f2a438b8c705"
+rev = "86d28e4"
+hash = "4c49c446328c4553a4ccab7facc10b21"
 
 [flavor]
 deps = []

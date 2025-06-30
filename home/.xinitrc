@@ -11,7 +11,6 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 export XDG_SESSION_TYPE="x11"
 export XDG_SESSION_DESKTOP="bspwm"
 export XDG_CURRENT_DESKTOP="bspwm"
-
 export DESKTOP_SESSION="bspwm"
 export WINDOW_MANAGER="bspwm"
 

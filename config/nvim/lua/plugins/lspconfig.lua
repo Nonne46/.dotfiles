@@ -161,6 +161,14 @@ return {
             },
           },
         },
+
+        harper_ls = {
+          settings = {
+            ['harper-ls'] = {
+              userDictPath = vim.fn.stdpath 'data' .. '/harper_ls/dict.txt',
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -174,6 +182,7 @@ return {
         'prettierd',
         'prettier',
         'ruff',
+        'harper-ls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
