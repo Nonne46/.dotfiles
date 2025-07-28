@@ -7,12 +7,12 @@ return {
   },
   keys = {
     {
-      '<C-x>',
+      '<leader>cc',
       function()
         require('compile-mode').compile { count = 10 }
       end,
       'n',
-      { desc = '[C]ode [C]ompile' },
+      desc = '[C]ode [C]ompile',
     },
   },
   config = function()

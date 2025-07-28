@@ -9,13 +9,14 @@ require("bunny"):setup({
 		{ key = { "l", "s" }, path = "~/.local/share", desc = "Local share" },
 		{ key = { "l", "b" }, path = "~/.local/bin", desc = "Local bin" },
 
-		{ key = { "a" }, path = "/media/g/temp/РС/avaaa/", desc = "Avaaa" },
+		{ key = { "a" }, path = "/media/f/media/avaaa/", desc = "Avaaa" },
 
 		-- Mounts
 		{ key = { "m", "c" }, path = "/media/c", desc = "C drive" },
 		{ key = { "m", "e" }, path = "/media/e", desc = "E drive" },
 		{ key = { "m", "g" }, path = "/media/g", desc = "G drive" },
 		{ key = { "m", "h" }, path = "/media/h", desc = "H drive" },
+		{ key = { "m", "f" }, path = "/media/f", desc = "F drive" },
 		{ key = { "m", "t" }, path = "/media/tamikuru_nfs", desc = "Tamikuru NFS" },
 	},
 	desc_strategy = "path",

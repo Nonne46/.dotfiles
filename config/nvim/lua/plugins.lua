@@ -1,7 +1,7 @@
 -- [[ Configure and install plugins ]]
 
 require('lazy').setup({
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
 
   require 'plugins.gitsigns',
 
@@ -15,11 +15,7 @@ require('lazy').setup({
 
   require 'plugins.cmp',
 
-  -- require 'plugins.oxocarbon',
-  -- require 'plugins.zenbones',
   require 'plugins.nightfox',
-  -- require 'plugins.mellifluous',
-  -- require 'plugins.kanagawa',
 
   require 'plugins.todo-comments',
 
