@@ -25,3 +25,6 @@ alias ys="yay -Slq | fzf -m --preview 'yay -Si {1}' --preview-window right:70% |
 alias ysr="yay -Qq | fzf -m --preview 'yay -Qi {1}' --preview-window right:70% | yay -Rsn -"
 
 alias a2c="aria2c -x16 -s16 --min-split-size=1M --max-connection-per-server=16 --enable-http-pipelining --piece-length=4M --disk-cache=128M --file-allocation=prealloc --connect-timeout=60 --timeout=60 --disable-ipv6 --check-certificate=false"
+
+alias cp="cp --verbose --reflink=auto"
+alias mv="mv --verbose"
