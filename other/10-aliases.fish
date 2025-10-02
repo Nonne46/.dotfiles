@@ -28,3 +28,6 @@ alias a2c="aria2c -x16 -s16 --min-split-size=1M --max-connection-per-server=16 -
 
 alias cp="cp --verbose --reflink=auto"
 alias mv="mv --verbose"
+
+alias sa="shiori add"
+alias sl="shiori ls"
