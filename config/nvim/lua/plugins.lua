@@ -32,6 +32,8 @@ require('lazy').setup({
   require 'plugins.toggelterm',
 
   require 'plugins.neogit',
+
+  require 'plugins.kulala',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
