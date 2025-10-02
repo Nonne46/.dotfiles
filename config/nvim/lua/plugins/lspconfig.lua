@@ -12,7 +12,7 @@ local servers = {
           globalPlugins = {
             {
               name = '@vue/typescript-plugin',
-              location = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server',
+              location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
               languages = { 'vue' },
               configNamespace = 'typescript',
             },
@@ -48,14 +48,6 @@ local servers = {
       },
     },
   },
-
-  harper_ls = {
-    settings = {
-      ['harper-ls'] = {
-        userDictPath = vim.fn.stdpath 'data' .. '/harper_ls/dict.txt',
-      },
-    },
-  },
 }
 
 return {
@@ -72,15 +64,14 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependents
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
-      'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -137,10 +128,11 @@ return {
 
       -- Actually enabling lsp's
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
-      -- Ensure the servers and tools above are installed
-      require('mason').setup()
+      require('mason-lspconfig').setup {
+        automatic_enable = vim.tbl_keys(servers or {}),
+      }
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
@@ -150,15 +142,11 @@ return {
         'prettierd',
         'prettier',
       })
-
-      require('mason-lspconfig').setup {
-        automatic_enable = vim.tbl_keys(servers or {}),
-      }
-
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      for server_name, config in pairs(servers) do
-        vim.lsp.config(server_name, config)
+      for server_name, server_config in pairs(servers) do
+        server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+        vim.lsp.config(server_name, server_config)
       end
     end,
   },

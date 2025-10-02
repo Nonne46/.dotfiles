@@ -13,7 +13,7 @@ require('lazy').setup({
 
   require 'plugins.conform',
 
-  require 'plugins.cmp',
+  require 'plugins.blink',
 
   require 'plugins.nightfox',
 
