@@ -5,7 +5,7 @@ GARBAGE_DIR = '~/garbage/'
 
 -- Neovide specific
 if vim.g.neovide then
-  vim.o.guifont = 'Sarasa Mono Slab J:h14'
+  vim.o.guifont = 'Sarasa Term J:h14'
 end
 
 -- Make line numbers default

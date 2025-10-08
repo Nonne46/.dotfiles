@@ -9,7 +9,7 @@ response=$(curl -X POST \
 -X POST \
 -F "url=$clip" \
 -H "Authorization: $key" \
-$NS)
+"$NS")
 
 url=$response
 if command -v xclip &> /dev/null; then

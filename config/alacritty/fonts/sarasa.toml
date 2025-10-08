@@ -1,9 +1,9 @@
 [font]
-size = 12
+size = 14
 
 [font.normal]
 family = "Sarasa Term J"
-style = "Regular"
+style = "SemiBold"
 
 [font.bold]
 family = "Sarasa Term J"

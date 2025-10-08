@@ -33,7 +33,7 @@ if [ -s "$filepath" ]; then
 	-X POST \
         -F "file=@$filepath" \
 	-H "Authorization: $key" \
-	$NS)
+	"$NS")
     
 
     url=$response

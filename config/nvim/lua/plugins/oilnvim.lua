@@ -3,6 +3,7 @@ return {
   version = '*',
   opts = {
     columns = { 'icons' },
+    watch_for_changes = true,
     keymaps = {
       ['<C-c>'] = false,
       ['q'] = 'actions.close',
