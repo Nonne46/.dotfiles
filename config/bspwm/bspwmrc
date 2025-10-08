@@ -5,6 +5,12 @@ pgrep -x picom > /dev/null                               || picom --config "$HOM
 pgrep -x polkit-gnome-authentication-agent-1 > /dev/null || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 pgrep -x polybar > /dev/null                             || polybar bspwm -r &
 
+ALACRITTY_SOCKET="/run/user/$(id -u)/alacritty.sock"
+if ! pgrep -x alacritty > /dev/null; then
+    [ -S "$ALACRITTY_SOCKET" ] && rm -f "$ALACRITTY_SOCKET"
+    alacritty --daemon --socket "$ALACRITTY_SOCKET" &
+fi
+
 bspc monitor -d 一 二 三 四 五 六 七 八 九 十
 # switch off weeaboo numbers
 # bspc monitor ^1 -d 1 2 3 4 5 6 7 8 9 0

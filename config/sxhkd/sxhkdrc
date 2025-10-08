@@ -17,7 +17,8 @@ XF86MonBrightnessDown
 
 # Terminal Emulator
 super + Return
-	alacritty
+	alacritty msg --socket "$XDG_RUNTIME_DIR/alacritty.sock" create-window || alacritty --socket "$XDG_RUNTIME_DIR/alacritty.sock"
+	# alacritty 
 
 # Program Launcher
 super + {space}
